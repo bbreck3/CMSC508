@@ -1,0 +1,8 @@
+$(document).ready(function(){
+    $("g1").mouseover(function(){
+        $("g1").css("background-color", "black");
+    });
+    $("p").mouseout(function(){
+        $("p").css("background-color", "lightgray");
+    });
+});
