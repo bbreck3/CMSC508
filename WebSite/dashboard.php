@@ -359,83 +359,29 @@ html { height: 100%;}
 
 
 
+<!--   SEARCH FOR SONG   -->
+
+
+
+
 	
-	Debugging new style menu-->
-	
-						
+  <div class="container">
+  <h2>Welcome </h2>
+  <div class="panel panel-default">
+    <div class="panel-heading">Search Music</div>
+    <div class="panel-body">
 
-
-
-<div id="wrapper">
-        <div class="overlay"></div>
-    
-        <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-            <ul class="nav sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                       MyProfile
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Playlist</a>
-                </li>
-                <li>
-                    <a href="#">Favorites</a>
-                </li>
-                <li>
-                    <a href="#">Settings</a>
-                </li>
-                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-                <!-- <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/maridlcrmn">Follow me</a>
-                </li>   -->
-            </ul>
-        </nav>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                <span class="hamb-top"></span>
-    			<span class="hamb-middle"></span>
-				<span class="hamb-bottom"></span>
-            </button>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <h1>Welcome</h1>
-
-                        <p>
-						
-						<h3><form class="navbar-form navbar-left" role="search">
+        <h3><form class="navbar-form navbar-left" role="search">
   <div class="form-group">
     <b> TEST</b>: <input type="text" class="form-control" placeholder="Search"> 
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
- Search Song
+  <!--<button type="submit" class="btn btn-default">Submit</button> -->
+ 
+
+ <!-- FORM TO TAKE IN USER SELECTION -->
 
 <form action="parse.php" method="post">
-  Title: <input type="text" name="title" size="10" value="">
+  Title: <input type="text" name="title" size="10" value="" placeholder="Search">
   Genre: <select name="genre">
   <option value="Rock N Roll">Rock N Roll</option>
   <option value="Country">Country</option>
@@ -517,10 +463,24 @@ Release Year <select name="year">
 <option value="2015">2015</option>
 </select>
   <input type="submit" value="Search">
-</form>-->
+</form>
 </form></h3>
 
-sample dummy data from database-->
+
+
+
+
+    </div>
+
+<!-- END FORM -->
+
+<!-- TABLE TO DISPLAY CONTENT FROM DATABASE  -->
+
+<div class="panel-body">
+
+
+
+    sample dummy data from database-->
                         
  <?php
 $servername = "localhost:20037/xe";
@@ -559,15 +519,108 @@ echo "</table>\n";
 oci_close($conn);
 ?>
 
-                        </p>
+</div>
+
+<!-- END DATABASE TABLE  -->
+  </div>
+</div>
+
+<!-- END SEARCH FOR SONG  -->
+						
+
+<!--    SIDE MENU  -->
+
+<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       MyProfile
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Playlist</a>
+                </li>
+                <li>
+                    <a href="#">Favorites</a>
+                </li>
+                <li>
+                    <a href="#">Settings</a>
+                </li>
+                 <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Dropdown heading</li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <!-- <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/maridlcrmn">Follow me</a>
+                </li>   -->
+            </ul>
+        </nav>
+<!-- END SIDE MENU   -->
+
+
+
+
+
+
+<!--
+
+
+    THIS HAS TO BE HERE!!!!!!
+
+    DO NOT DELETE ....IT WIL BREAK THE PICTURE LINK AT THE TOP
+
+-->
+<!-- BUTTON TO ACCESS THE SIDE BAR -->
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
                     </div>
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
 
-    </div>
+       </div>
     <!-- /#wrapper -->
+
+<!-- END BUTTON TO ACCESS THE SIDE BAR -->
+                        
+						
+						
+
+
+
+                        </p>
+                   
 
 </body>
 </html>
