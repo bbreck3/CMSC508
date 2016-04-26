@@ -47,9 +47,10 @@
             <div class="panel-body">
               <h3 class="panel-title"> <a href="index.php"> Sign in to continue </a>
                <a href="index.php"></h3>
-               <a href="dashboard.php">
+               <!-- For Debugging purposes: Uncomment when needed --> 
+                <!-- <a href="dashboard.php">
               Link to dashboard while debugging php
-              </a>
+              </a> -->
 
 
 
@@ -198,9 +199,9 @@ else {
         $sql = "INSERT INTO
                     user_info(first_name, last_name, email,password)
                 VALUES( '$first_name',
-                       '$last_name',
-                       '  $email',
-                       ' $hashedPass'
+                        '$last_name',
+                        '$email',
+                        '$hashedPass'
                        )";
                          
        

@@ -1,0 +1,16 @@
+class foo{
+	
+public statuc void main(String args){
+	
+	System.out.println("Hello World");
+}
+}
+
+
+
+
+#include <iostream>
+
+int main(){
+	std::cout<< "Hello World" << endl;
+}

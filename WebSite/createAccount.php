@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-<title> RamTunes</title>
+<title> RAMOverflow</title>
 
 
   <center>
@@ -41,7 +41,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Thank for for choosing RamTunes</h3>
+              <h3 class="panel-title">Thank for for choosing RAMOverflow</h3>
                <h3 class="panel-title">Please sign up to continue</h3>
             </div>
             <div class="panel-body">
@@ -77,9 +77,12 @@
                 </div>
                 
                 <input type="submit" value="Register" class="btn btn-info btn-block">
-                <a href="dashboard.php">
+                
+
+            <!-- For Debugging purposes: Uncomment when needed --> 
+                <!-- <a href="dashboard.php">
               Link to dashboard while debugging php
-              </a>
+              </a> -->
               
               </form>
 
