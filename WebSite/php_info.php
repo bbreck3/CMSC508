@@ -65,7 +65,7 @@ $(document).ready(function() {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">MyProfile</a>
+      <a class="navbar-brand" href="dashboard.php">MyProfile</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
@@ -79,6 +79,7 @@ $(document).ready(function() {
             <li ><a href="#"></a></li>
             <li><a href="index.php">Logout</a></li>
             <li><a href="#">Change Password</a></li>
+            <li><a href="php_info.php">PHP Reference</a></li>
             <li class="divider"></li>
             <!-- <li><a href="#">Separated link</a></li>
             <li class="divider"></li>
@@ -96,18 +97,25 @@ $(document).ready(function() {
 <!-- MAIN BODY CONTENTS GOES HERE -->
 <div class="main">
 
+
+
 <!--   BROWSE YOUR CLASSES  -->
+
 
 
 
 
   
   <div class="container" style="marging-left: auto; margin-right:auto; width:85%">
-  
+
   <div class="panel panel-default">
-    <div class="panel-heading"> <bold> <h1> Welcome <!-- <?php  echo $first_name = $_POST['inputEmail']; ?> --></h1> </bold></div>
+    <div class="panel-heading"> <bold> <h1> 
+      
+    </h1> </bold></div>
     <div class="panel-heading"> <bold> <h2> Browse Classes</h3> </bold></div>
     <div class="panel-body">
+
+
 
 
 <!-- CANVASAS FOR EACH OF YOUR CLASSES -->
@@ -123,51 +131,19 @@ $(document).ready(function() {
     <p class="lead">
 
         <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
-          <?php
+      <?php
+        phpversion();
+        phpinfo();
+      ?>          
 
-          $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
+        </div>
 
-      if(!$conn) {
-        $m = oci_error();
-        echo "Connection Unsuccessful!";
-        exit;
-      }else{
-
-          $sql="SELECT input FROM comments";
-          //$sql = "SELECT * FROM user_info";
-
-
-          $results=oci_parse($conn, $sql);
-          oci_execute($results);
-          $res = oci_fetch_array($results);
-          //var_dump($res);
-        
-        
-
-
-  while($row=oci_fetch_array($results, OCI_ASSOC+OCI_RETURN_NULLS)){
-   
-  $fromDB = $row['INPUT'];
-   $temp = explode(" ", $fromDB);
-  for($i = 0; $i < count($temp);$i++)
-  {
-  echo $temp[$i];
-  echo "<br>";
-    }
-   
-}
-}
-          
-?>
-
-</div>
-
- <form action="postInfo.php" method="post">
-      <textarea name="responce" rows="5" cols="100"> </textarea>
+ <!--<form action="postInfo.php" method="post">
+      <textarea name="responce" rows="5" cols="100"> </textarea> -->
 
       <!-- <input type="text" name="responce"> -->
-      <input type="submit" value="Submit">
-  </form>
+      <!-- <input type="submit" value="Submit">
+  </form> -->
 
 
 

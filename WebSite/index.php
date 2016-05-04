@@ -25,7 +25,7 @@
   </style>
 </head>
 <body>
-<title> RamTunes</title>
+<title> RAMOverflow</title>
 
 
   
@@ -34,7 +34,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
 <center>
-     <form class="form-signin" method="post" action="">
+     <form class="form-signin" method="post" action="dashboard.php">
 
         <h1 class="form-signin-heading" >Welcome to RAMOverflow</h1>
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -64,17 +64,20 @@
     <button>Link to dashboard while debugging php</button>
 </a> -->
 
+<!-- BEGIN PHP :== USER AUTHENTICATION   -->
+
+
 <?php
 
-	$inputEmail =$_POST['inputEmail'];
-	$inputPassword =$_POST['inputPassword'];
-	
-/* For debugging 
-	echo $inputEmail;
-	echo "<br>";
-	echo $inputPassword;
+  //$inputEmail =$_POST['inputEmail'];
+  //$inputPassword =$_POST['inputPassword'];
+  
+//For debugging 
+  //echo $inputEmail;
+  //echo "<br>";
+  //echo $inputPassword;
 
-*/
+
 if($_SERVER['REQUEST_METHOD'] != 'POST')
 {
     /*the form hasn't been posted yet, display it
@@ -100,71 +103,71 @@ else
      //first name check
     if(isset($_POST['inputEmail']) and isset($_POST['inputPassword']))
     {
-    		$email= $_POST['inputEmail'];
-			$passwordHash = hashPass($_POST['inputPassword'], $hash_method = 'sha1');
+      $email= $_POST['inputEmail'];
+      $passwordHash = hashPass($_POST['inputPassword'], $hash_method = 'sha1');
 
-			$conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
-
-
-
-			if(!$conn) {
-				$m = oci_error();
-				echo "Connection Unsuccessful!";
-				exit;
-			}else{
-				//echo "Connection Successful!";
-					//$sql = "SELECT email, password FROM user_info WHERE email= '$email' and password='$passwordHash'";
-					//$sql = "SELECT * FROM user_info";
-
-					//$results = oci_parse($conn, $sql);
-
-					$sql="SELECT email, password FROM user_info WHERE email='$email' and password='$passwordHash'";
-					//$sql = "SELECT * FROM user_info";
-					$results=oci_parse($conn, $sql);
-
-					oci_execute($results);
-					$res = oci_fetch_array($results);
+      $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
 
 
-				 /** for debuggin purposes: Uncomment when needed */
-					/*echo "DB PASSWORD:";
-					echo "<br>";
-					
-					echo $res['PASSWORD'];
-					echo "<br>";
-					echo "User Pass:";
-					echo "<br>";
-					echo $passwordHash;
-					//var_dump($res);
-					*/
-					
-					
 
-					
-	
-					if($passwordHash==$res['PASSWORD']){
-						/** for debuggin purposes: Uncomment when needed */
-						
-						/* echo "Passwords Match:";
-						echo "<br>";
-						echo "From user:";
-						echo "<br>";
-						echo $passwordHash;
-						echo "<br>";
-						echo "From DB:";
-						echo "<br>";
-						echo $res['PASSWORD']; */
+      if(!$conn) {
+        $m = oci_error();
+        echo "Connection Unsuccessful!";
+        exit;
+      }else{
+        //echo "Connection Successful!";
+          //$sql = "SELECT email, password FROM user_info WHERE email= '$email' and password='$passwordHash'";
+          //$sql = "SELECT * FROM user_info";
 
-						header('Location: dashboard.php');   
+          //$results = oci_parse($conn, $sql);
 
-					} else {
-						echo "<br>";
-						echo "Incorrect Username or Password.";
-					}
-					//header('Location: dashboard.php'); 
-			}
-		}
-	}
+          $sql="SELECT email, password FROM user_info WHERE email='$email' and password='$passwordHash'";
+          //$sql = "SELECT * FROM user_info";
+          $results=oci_parse($conn, $sql);
+
+          oci_execute($results);
+          $res = oci_fetch_array($results);
+
+
+         /** for debuggin purposes: Uncomment when needed */
+          /*echo "DB PASSWORD:";
+          echo "<br>";
+          
+          echo $res['PASSWORD'];
+          echo "<br>";
+          echo "User Pass:";
+          echo "<br>";
+          echo $passwordHash;
+          //var_dump($res);
+          */
+          
+          
+
+          
+  
+          if($passwordHash==$res['PASSWORD']){
+            /** for debuggin purposes: Uncomment when needed */
+            
+            /* echo "Passwords Match:";
+            echo "<br>";
+            echo "From user:";
+            echo "<br>";
+            echo $passwordHash;
+            echo "<br>";
+            echo "From DB:";
+            echo "<br>";
+            echo $res['PASSWORD']; */
+
+            header('Location: dashboard.php');   
+
+          } else {
+            echo "<br>";
+            echo "Incorrect Username or Password.";
+          }
+          //header('Location: dashboard.php'); 
+      }
+    }
+  }
 
 
 
@@ -174,10 +177,10 @@ else
 
 
 function validateLogin($pass, $hashed_pass, $salt) {
-	if (function_exists('hash') && in_array($hash_method, hash_algos())) {
-		return ($hashed_pass === crypt($pass, $hashed_pass));
-	}
-	return ($hashed_pass === _create_hash($pass, $salt));
+  if (function_exists('hash') && in_array($hash_method, hash_algos())) {
+    return ($hashed_pass === crypt($pass, $hashed_pass));
+  }
+  return ($hashed_pass === _create_hash($pass, $salt));
 }
 function hashPass($string, $hash_method = 'sha1') {
         // generate random salt
@@ -192,8 +195,18 @@ function hashPass($string, $hash_method = 'sha1') {
 ?>
 
 
+<!-- END PHP -->
+
+
+
   </div>
 </div>
+
+
+
+
+
+
 
 
      
