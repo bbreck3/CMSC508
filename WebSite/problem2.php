@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+'<!DOCTYPE html>
 <meta chartset="utf-8">
 <head>
   <link rel="stylesheet" href="stylesheet.css">
@@ -139,8 +139,6 @@ $(function(){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li> -->
-        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
           <ul class="dropdown-menu forAnimate" role="menu">
@@ -162,7 +160,6 @@ $(function(){
 
 
 <!-- MAIN BODY CONTENTS GOES HERE -->
-
 <div class="main">
 
 
@@ -186,13 +183,10 @@ $(function(){
 
   <div class="panel panel-default">
     <div class="panel-heading"> <bold> <h1> 
-      Welcome to 5 Questions
+      Problem 2
 
 
     </h1> </bold></div>
-    <div class="panel-heading"> <bold> <h4>A hint about each question will be given to help you guess correctly.<br>
-                                          You will be unable to proceed to the next question until you successfully answer 
-                                          the current question.</h4> </bold></div>
     <div class="panel-body">
 
 
@@ -205,9 +199,8 @@ $(function(){
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Problem 1</h1>
+    <h1 class="display-3"></h1>
     <p class="lead">
-
 
         
       <?php 
@@ -223,14 +216,19 @@ $(function(){
 
 
           $sql="SELECT problem, description, answer FROM puzzle
-              WHERE ID='1'";
+              WHERE ID='2'";
           //$sql = "SELECT * FROM user_info";
 
 
           $results=oci_parse($conn, $sql);
           oci_execute($results);
           $res = oci_fetch_array($results);
-         
+          //var_dump($res);
+          /*echo $res[0];
+          echo "<br>";
+          echo $res[1];
+          echo "<br>";*/
+          //echo $res[2];
         
 
         
@@ -246,13 +244,13 @@ $(function(){
         echo "<br>";
         echo $problem;
         
-       
+      
       }
     
 
 ?>
 
-  <form action="problem1_responce.php" method="post">
+  <form action="problem2_responce.php" method="post">
       <textarea name="responce" rows="1" cols="100"> </textarea>
 
       <!-- <input type="text" name="responce"> -->
@@ -262,35 +260,6 @@ $(function(){
 </div> 
 
 <!-- END FORM -->
-
-<!-- END MAIN BODY CONTECT  -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
-            
-            
-
-
-
-                        
-                   
 
 </body>
 </html>

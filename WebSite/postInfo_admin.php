@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<meta chartset="utf-8">
+ <meta http-equiv="refresh" content="5;URL='admin.php" />
 <head>
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -42,80 +42,11 @@ $(document).ready(function() {
         htmlbodyHeightUpdate()
     });
   });
-
-
-
-$(function(){ 
-     //alert(event.timeStamp);
-     $('.new-com-bt').click(function(event){    
-         $(this).hide();
-         $('.new-com-cnt').show();
-         $('#name-com').focus();
-     });
- 
-     /* when start writing the comment activate the "add" button */
-     $('.the-new-com').bind('input propertychange', function() {
-        $(".bt-add-com").css({opacity:0.6});
-        var checklength = $(this).val().length;
-        if(checklength){ $(".bt-add-com").css({opacity:1}); }
-     });
- 
-     /* on clic  on the cancel button */
-     $('.bt-cancel-com').click(function(){
-         $('.the-new-com').val('');
-         $('.new-com-cnt').fadeOut('fast', function(){
-             $('.new-com-bt').fadeIn('fast');
-         });
-     });
- 
-     // on post comment click 
-     $('.bt-add-com').click(function(){
-         var theCom = $('.the-new-com');
-         var theName = $('#name-com');
-         var theMail = $('#mail-com');
- 
-         if( !theCom.val()){ 
-             alert('You need to write a comment!'); 
-         }else{ 
-             $.ajax({
-                 type: "POST",
-                 url: "ajax/add-comment.php",
-                 data: 'act=add-com&id_post='+<?php echo $id_post; ?>+'&name='+theName.val()+'&email='+theMail.val()+'&comment='+theCom.val(),
-                 success: function(html){
-                     theCom.val('');
-                     theMail.val('');
-                     theName.val('');
-                     $('.new-com-cnt').hide('fast', function(){
-                         $('.new-com-bt').show('fast');
-                         $('.new-com-bt').before(html);  
-                     })
-                 }  
-             });
-         }
-     });
- 
- });
-
-
-
-
 </script>
 <style>
    
 </style>
 <body>
-
-
-
-<!-- BEGIN USER AUTHENTICATION AND TEST IF USER IS VALID
-
-    IF YES:
-      THEN LOG THEM IN, REDIRECT TO THEIR DASHBOARD, REGISTER THE SESSSION, AND LOAD ALL CONTENT
-    ELSE: 
-      DO NOT LOG IN USER, OUTPUT ERROR AND REDIRECT TO LOGIN PAGE -->
-
-
-
 
 
 
@@ -134,13 +65,14 @@ $(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="dashboard.php">MyProfile</a>
+      <a class="navbar-brand" href="#">MyProfile</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li> -->
-        
+        <li ><a href="#">PlusPLus's<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+        <!--<li ><a href="#">Favorites<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li> -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
           <ul class="dropdown-menu forAnimate" role="menu">
@@ -161,38 +93,21 @@ $(function(){
 <!-- END SIDE MENU   -->
 
 
+
 <!-- MAIN BODY CONTENTS GOES HERE -->
-
 <div class="main">
-
-
 
 <!--   BROWSE YOUR CLASSES  -->
 
 
 
 
-
   
   <div class="container" style="marging-left: auto; margin-right:auto; width:85%">
-
-
-
-
-
-
-
-
-
+  
   <div class="panel panel-default">
-    <div class="panel-heading"> <bold> <h1> 
-      Welcome to 5 Questions
-
-
-    </h1> </bold></div>
-    <div class="panel-heading"> <bold> <h4>A hint about each question will be given to help you guess correctly.<br>
-                                          You will be unable to proceed to the next question until you successfully answer 
-                                          the current question.</h4> </bold></div>
+    <div class="panel-heading"> <bold> <h1> Welcome </h1> </bold></div>
+    <div class="panel-heading"> <bold> <h2> Browse Classes</h3> </bold></div>
     <div class="panel-body">
 
 
@@ -205,92 +120,96 @@ $(function(){
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Problem 1</h1>
+    <h1 class="display-3"></h1>
     <p class="lead">
+          <?php
 
+          /** Grab the info from the user and prep it for database insertion **/
 
-        
-      <?php 
-      $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
+          $ID = $_POST['selectedProblem'];
+          $NAME = $_POST['problemName'];
+          $DESCRIPTION = $_POST['description'];
+          $ANSWER = $_POST['answer'];
+          $PROBLEM = $_POST['theProblem'];
+
+          $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
 
       if(!$conn) {
         $m = oci_error();
-        echo "Connection Unsuccessful!";
+        //echo "Connection Unsuccessful!";
         exit;
       }else{
 
-
-
-
-          $sql="SELECT problem, description, answer FROM puzzle
-              WHERE ID='1'";
-          //$sql = "SELECT * FROM user_info";
-
-
+          $sql="INSERT into puzzle(ID, NAME, DESCRIPTION, ANSWER, PROBLEM)
+                            VALUES('$ID', 
+                                    '$NAME',
+                                    '$DESCRIPTION',
+                                    '$ANSWER',
+                                    '$PROBLEM')";
           $results=oci_parse($conn, $sql);
           oci_execute($results);
-          $res = oci_fetch_array($results);
-         
-        
+      }  
 
-        
-        $problem = $res[0];
-       // $answer = $res[2];
-        $description = $res[1];
-          
-        echo "Description";
-        echo "<br>";
-        echo $description;
-        echo "<br>";
-        echo "Problem";
-        echo "<br>";
-        echo $problem;
-        
-       
-      }
-    
+        if(!$results)
+        {
+            //something went wrong, display the error
+            echo 'Something went wrong when uploading the informaton. Please try again!';
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            echo 'Your Informaton was Successfully Recorded. ';
+        }
+        oci_close($conn);
+      ?>
 
-?>
 
-  <form action="problem1_responce.php" method="post">
-      <textarea name="responce" rows="1" cols="100"> </textarea>
+<!-- 
 
-      <!-- <input type="text" name="responce"> -->
-      <input type="submit" value="Submit">
-      </form>
+  OLD  IDEA DATABASE STUFF 
+<?php
+
+/*$data1="";
+$prep = $_POST['responce'];
+$temp = explode(" ", $prep);
+ 
+$dataSize = sizeof($temp);
+
+for($i = 0; $i < $dataSize;$i++)
+{
+  $data1 .=$temp[$i]." ";
+}
+echo "<br>";
+$conn = oci_connect('breckenridrw', 'V00637965', 'localhost:20037/xe'); // this is localhost, i.e., jasmine.cs.vcu.edu
+
+if (!$conn) {
+ $m = oci_error();
+ echo "Connection Unsuccessful";//$m['Connection Unsuccessful!'], "\n";
+ exit;
+}
+else {
+        $sql = "INSERT INTO
+                    comments(comments)
+                VALUES('$data1'
+                       )";    
+        $result = oci_parse($conn, $sql);
+        oci_execute($result);
+        //if(!$result)
+        if(!$result)
+        {
+           echo 'Something went wrong with the data insertion. Please try again.';
+        }
+        else
+        {  
+            echo 'Your input has been recorded.';
+            echo "You will be redirected momentarily";
+
+            $data1="";
+
+        }
+      oci_close($conn);
+      } */
+
+      ?> -->
 </div>
-</div> 
-
-<!-- END FORM -->
-
-<!-- END MAIN BODY CONTECT  -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
-            
-            
-
-
-
-                        
-                   
-
-</body>
-</html>
+</div>

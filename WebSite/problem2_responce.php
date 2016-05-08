@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta chartset="utf-8">
+<!--<meta http-equiv="refresh" content="5;URL='dashboard.php" />-->
 <head>
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -139,8 +140,6 @@ $(function(){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li> -->
-        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
           <ul class="dropdown-menu forAnimate" role="menu">
@@ -162,7 +161,6 @@ $(function(){
 
 
 <!-- MAIN BODY CONTENTS GOES HERE -->
-
 <div class="main">
 
 
@@ -186,13 +184,11 @@ $(function(){
 
   <div class="panel panel-default">
     <div class="panel-heading"> <bold> <h1> 
-      Welcome to 5 Questions
+      Problem 2
 
 
     </h1> </bold></div>
-    <div class="panel-heading"> <bold> <h4>A hint about each question will be given to help you guess correctly.<br>
-                                          You will be unable to proceed to the next question until you successfully answer 
-                                          the current question.</h4> </bold></div>
+   
     <div class="panel-body">
 
 
@@ -205,9 +201,8 @@ $(function(){
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Problem 1</h1>
+    <h1 class="display-3"></h1>
     <p class="lead">
-
 
         
       <?php 
@@ -223,19 +218,24 @@ $(function(){
 
 
           $sql="SELECT problem, description, answer FROM puzzle
-              WHERE ID='1'";
+              WHERE ID='2'";
           //$sql = "SELECT * FROM user_info";
 
 
           $results=oci_parse($conn, $sql);
           oci_execute($results);
           $res = oci_fetch_array($results);
+          
+          //var_dump($res);
+
+
          
-        
 
         
+
+       
         $problem = $res[0];
-       // $answer = $res[2];
+        $answer = $res[2];
         $description = $res[1];
           
         echo "Description";
@@ -245,24 +245,173 @@ $(function(){
         echo "Problem";
         echo "<br>";
         echo $problem;
-        
        
+
+       
+
+
+        $answer = $res[0];
+        $problem = $res[1];
+        $description = $res[2];
+
+        $user_input = $_POST['responce'];
+        //echo $user_input;
+        //echo strlen($user_input);
+     
+        $user_answer_update = "UPDATE user_answer
+                                SET user_answer = '$user_input'
+                                WHERE ID ='1'";
+
+
+
+        $user_answer_update_results = oci_parse($conn, $user_answer_update);
+
+        oci_execute( $user_answer_update_results);
+
+
+
+
+     
+        $user_answer_select = "SELECT  user_answer FROM user_answer
+                                    WHERE ID ='1'";
+        $user_answer_insert_select = oci_parse($conn, $user_answer_select);
+
+        oci_execute( $user_answer_insert_select);
+
+
+
+
+
+         $user_input_from_DB = oci_fetch_array($user_answer_insert_select);
+         $user_input_check =  $user_input_from_DB[0];
+
+        //echo strlen($user_input_check);
+        // echo "<br>";
+         //echo $res['ANSWER'];
+        // echo "<br>";
+
+       
+
+      
+        //if($user_input_check===$res['ANSWER']) {
+         //(strcmp($user_input_check,$res[0])) ==0
+        $temp1 = trim($user_input_check);
+        $temp2 = trim($res['ANSWER']);
+        
+        
+          if($temp1===$temp2) {
+            //for debuggin purposes: Uncomment when needed 
+            
+          echo file_get_contents("correct_answer.php");
+            echo  file_get_contents("linkToProblem3.php");
+
+            
+           
+              
+            } else{
+            echo file_get_contents("incorrect_answer.php");
+           // echo "Try again?<br>";
+            //echo file_get_contents('try_again.php');
+
+            //echo file_get_contents('login_error.php');
+            
+          } 
+          //header('Location: dashboard.php'); 
       }
-    
+
 
 ?>
 
-  <form action="problem1_responce.php" method="post">
+
+
+<form action="problem2_responce.php" method="post">
       <textarea name="responce" rows="1" cols="100"> </textarea>
 
       <!-- <input type="text" name="responce"> -->
-      <input type="submit" value="Submit">
-      </form>
+     <input type="submit" value="Submit">
+  </form>
+
+
+
+
+
 </div>
 </div> 
 
 <!-- END FORM -->
 
+<!-- TABLE TO DISPLAY CONTENT FROM DATABASE  -->
+
+<div class="panel-body">
+
+
+
+    <!-- sample dummy data from database-->
+                        
+ <?php
+$servername = "localhost:20037/xe";
+$username = "breckenridrw";
+$password = "V00637965";
+$database = "breckenridrw";
+
+// Create connection
+
+$conn = oci_connect('breckenridrw', 'V00637965', 'localhost:20037/xe'); // this is localhost, i.e., jasmine.cs.vcu.edu
+
+if (!$conn) {
+ $m = oci_error();
+ echo $m['Connection Unsuccessful!'], "\n";
+ echo "<br>";
+ echo "Pending data form DB";
+ exit;
+}
+else {
+
+  /**
+      THIS WORKS BUT CHANGE THE VARIABLE TO REFLECT COMMENTS, CLASSES AND STUDENT USERS 
+        NOT ARTIST, ALBUMS, ETC.....
+
+
+        **/
+ /*print "Connection Successfull!";
+ echo "<table border='1'>\n";
+ $sql = "SELECT title, artist, album from sample_db";
+ $results = oci_parse($conn, $sql);
+ oci_execute($results);
+ while($row=oci_fetch_array($results, OCI_ASSOC+OCI_RETURN_NULLS)){
+  foreach ($row as $item) {
+    echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+    }
+    echo "</tr>\n";
+}
+echo "</table>\n";
+
+ */
+
+
+/**
+
+    END WORKS
+
+*/
+}
+
+
+
+
+// Close the Oracle connection
+oci_close($conn);
+?>
+
+</div>
+
+<!-- END DATABASE TABLE  -->
+  </div>
+</div>
+
+<!-- END SEARCH FOR SONG  -->
+            
+</div>  
 <!-- END MAIN BODY CONTECT  -->
 
 

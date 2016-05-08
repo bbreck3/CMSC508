@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- <meta http-equiv="refresh" content="5;URL='admin.php" /> -->
+ <meta http-equiv="refresh" content="5;URL='admin.php" />
 <head>
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -106,7 +106,7 @@ $(document).ready(function() {
   <div class="container" style="marging-left: auto; margin-right:auto; width:85%">
   
   <div class="panel panel-default">
-    <div class="panel-heading"> <bold> <h1> Welcome <!-- <?php  echo $first_name = $_POST['inputEmail']; ?> --></h1> </bold></div>
+    <div class="panel-heading"> <bold> <h1> Welcome </h1> </bold></div>
     <div class="panel-heading"> <bold> <h2> Browse Classes</h3> </bold></div>
     <div class="panel-body">
 
@@ -120,35 +120,77 @@ $(document).ready(function() {
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Class 1</h1>
+    <h1 class="display-3"></h1>
     <p class="lead">
-
-        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
           <?php
 
           /** Grab the info from the user and prep it for database insertion **/
 
+          
           $ID = $_POST['selectedProblem'];
-          $NAME = $_POST['problemName'];
-          $DESCRIPTION = $_POST['description'];
-          $ANSWER = $_POST['answer'];
+          $UPDATE_TAG = $_POST['selectedField'];
+          $UPDATE_FIELD = $_POST['toUpdate'];
 
           $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
 
       if(!$conn) {
         $m = oci_error();
-        echo "Connection Unsuccessful!";
+        //echo "Connection Unsuccessful!";
         exit;
       }else{
 
-          $sql="INSERT into puzzle(ID, NAME, DESCRIPTION, ANSWER)
-                            VALUES('$ID', 
-                                    '$NAME',
-                                    '$DESCRIPTION',
-                                    '$ANSWER')";
+
+          if($UPDATE_TAG=="Problem Name"){
+
+           
+            $sql="UPDATE puzzle
+                  SET NAME = '$UPDATE_FIELD'
+                  WHERE ID = $ID";
+
+          }
+
+          if($UPDATE_TAG=="Problem Description"){
+             
+            $sql="UPDATE puzzle
+                  SET DESCRIPTION = '$UPDATE_FIELD'
+                   WHERE ID = $ID";
+
+
+          }
+
+          if($UPDATE_TAG=="Problem Answer"){
+            
+
+            $sql="UPDATE puzzle
+                  SET ANSWER = '$UPDATE_FIELD'
+                   WHERE ID = $ID";
+
+          }
+
+          if($UPDATE_TAG=="Problem"){
+            
+
+            $sql="UPDATE puzzle
+                  SET ANSWER = '$UPDATE_FIELD'
+                   WHERE ID = $ID";
+
+          }
           $results=oci_parse($conn, $sql);
           oci_execute($results);
-      }?>
+      }  
+
+        if(!$results)
+        {
+            //something went wrong, display the error
+            echo 'Something went wrong when uploading the informaton. Please try again!';
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            echo 'Problem Number.' . $ID . ' was updated';
+        }
+        oci_close($conn);
+      ?>
 
 
 <!-- 
@@ -198,7 +240,5 @@ else {
       } */
 
       ?> -->
-
-    </div>
-    </div>
-    </div>
+</div>
+</div>

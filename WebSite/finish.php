@@ -139,8 +139,7 @@ $(function(){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li> -->
-        
+       
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
           <ul class="dropdown-menu forAnimate" role="menu">
@@ -148,9 +147,7 @@ $(function(){
             <li><a href="index.php">Logout</a></li>
             <li><a href="#">Change Password</a></li>
             <li class="divider"></li>
-            <!-- <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li> -->
+           
           </ul>
         </li>
         
@@ -162,7 +159,6 @@ $(function(){
 
 
 <!-- MAIN BODY CONTENTS GOES HERE -->
-
 <div class="main">
 
 
@@ -179,20 +175,13 @@ $(function(){
 
 
 
-
-
-
-
-
   <div class="panel panel-default">
     <div class="panel-heading"> <bold> <h1> 
-      Welcome to 5 Questions
+      Congratualtions!
 
 
     </h1> </bold></div>
-    <div class="panel-heading"> <bold> <h4>A hint about each question will be given to help you guess correctly.<br>
-                                          You will be unable to proceed to the next question until you successfully answer 
-                                          the current question.</h4> </bold></div>
+   
     <div class="panel-body">
 
 
@@ -205,13 +194,37 @@ $(function(){
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Problem 1</h1>
+    
     <p class="lead">
 
+        <center>
+        <h3> Congratulations, you have completed the game!</h3>
+       
+        <a href="dashboard.php"> Play Again?</a>
 
-        
-      <?php 
-      $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
+        </center>
+           <!-- <?php 
+        /** $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
+
+      if(!$conn) {
+        $m = oci_error();
+        echo "Connection Unsuccessful!";
+        exit;
+      }else{
+
+
+
+   
+
+
+
+
+
+
+
+         <?php
+
+          $conn = oci_connect('breckenridrw', 'V00637965' ,'localhost:20037/xe');
 
       if(!$conn) {
         $m = oci_error();
@@ -222,47 +235,143 @@ $(function(){
 
 
 
-          $sql="SELECT problem, description, answer FROM puzzle
-              WHERE ID='1'";
+          $sql="SELECT comments FROM comments";
           //$sql = "SELECT * FROM user_info";
 
 
           $results=oci_parse($conn, $sql);
           oci_execute($results);
           $res = oci_fetch_array($results);
+          //var_dump($res); 
          
         
 
-        
-        $problem = $res[0];
-       // $answer = $res[2];
-        $description = $res[1];
+
+  while($row=oci_fetch_array($results, OCI_ASSOC+OCI_RETURN_NULLS)){
+   
+  $fromDB = $row['INPUT'];
+   $temp = explode(" ", $fromDB);
+  for($i = 0; $i < count($temp);$i++)
+  {
+  echo $temp[$i];
+  echo "<br>";
+    }
+   
+}
+} */
           
-        echo "Description";
-        echo "<br>";
-        echo $description;
-        echo "<br>";
-        echo "Problem";
-        echo "<br>";
-        echo $problem;
-        
+?> -->
+
+
+
+
+
+
+
+<!-- Like the look but will not use for now -->
+<!-- Actual scrollspy markup: -->
+<!-- <nav id="navbar-example2" class="navbar navbar-default">
+  <h3 class="navbar-brand">Project Name</h3>
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a class="nav-link" href="#verse1">Verse 1</a></li>
+    <li class="nav-item"><a class="nav-link active" href="#verse2">Verse 2</a></li>
+  </ul>
+</nav>
+<div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+  <h4 id="verse1">Verse 1</h4>
+  <p>May <br> the <br> gods <br> forgive <br> me.</p>
+  <h4 id="verse2">Verse 2</h4>
+  <p>For <br> this <br> rampant <br> abuse <br> of <br> br-tags.</p>
+</div> -->
+
+
+  <!--<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <!-- <img src="..." alt="..."> 
+      <div class="caption">
+        <h3> Class 1</h3>
+        <p>...</p>
        
-      }
-    
-
-?>
-
-  <form action="problem1_responce.php" method="post">
-      <textarea name="responce" rows="1" cols="100"> </textarea>
-
-      <!-- <input type="text" name="responce"> -->
-      <input type="submit" value="Submit">
-      </form>
+      </div>
+    </div>
+  </div> -->
 </div>
 </div> 
 
 <!-- END FORM -->
 
+<!-- TABLE TO DISPLAY CONTENT FROM DATABASE  -->
+
+<div class="panel-body">
+
+
+
+    <!-- sample dummy data from database-->
+                        
+ <?php
+$servername = "localhost:20037/xe";
+$username = "breckenridrw";
+$password = "V00637965";
+$database = "breckenridrw";
+
+// Create connection
+
+$conn = oci_connect('breckenridrw', 'V00637965', 'localhost:20037/xe'); // this is localhost, i.e., jasmine.cs.vcu.edu
+
+if (!$conn) {
+ $m = oci_error();
+ echo $m['Connection Unsuccessful!'], "\n";
+ echo "<br>";
+ echo "Pending data form DB";
+ exit;
+}
+else {
+
+  /**
+      THIS WORKS BUT CHANGE THE VARIABLE TO REFLECT COMMENTS, CLASSES AND STUDENT USERS 
+        NOT ARTIST, ALBUMS, ETC.....
+
+
+        **/
+ /*print "Connection Successfull!";
+ echo "<table border='1'>\n";
+ $sql = "SELECT title, artist, album from sample_db";
+ $results = oci_parse($conn, $sql);
+ oci_execute($results);
+ while($row=oci_fetch_array($results, OCI_ASSOC+OCI_RETURN_NULLS)){
+  foreach ($row as $item) {
+    echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+    }
+    echo "</tr>\n";
+}
+echo "</table>\n";
+
+ */
+
+
+/**
+
+    END WORKS
+
+*/
+}
+
+
+
+
+// Close the Oracle connection
+oci_close($conn);
+?>
+
+</div>
+
+<!-- END DATABASE TABLE  -->
+  </div>
+</div>
+
+<!-- END SEARCH FOR SONG  -->
+            
+</div>  
 <!-- END MAIN BODY CONTECT  -->
 
 

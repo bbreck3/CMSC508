@@ -34,7 +34,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
 <center>
-     <form class="form-signin" method="post" action="">
+     <form class="form-signin" method="post" action="dashboard.php">
 
         <h1 class="form-signin-heading" >Welcome to RAMOverflow</h1>
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -121,7 +121,7 @@ else
 
           //$results = oci_parse($conn, $sql);
 
-          $sql="SELECT email, password,admin FROM user_info WHERE email='$email' and password='$passwordHash'";
+          $sql="SELECT email, password FROM user_info WHERE email='$email' and password='$passwordHash'";
           //$sql = "SELECT * FROM user_info";
           $results=oci_parse($conn, $sql);
 
@@ -140,8 +140,7 @@ else
           echo $passwordHash;
           //var_dump($res);
           */
-          //var_dump($res);
-
+          
           
 
           
@@ -159,22 +158,18 @@ else
             echo "<br>";
             echo $res['PASSWORD']; */
             //echo file_get_contents('dashboard.php');
-            if($res['ADMIN']=="T"){
-              echo "Debug";
-             header('Location: admin.php'); 
-            } else if($res['ADMIN']==null){
-                header('Location: dashboard.php');   
-            } 
-          //header('Location: dashboard.php'); 
-      } else if(!($passwordHash==$res['PASSWORD'])) {
-            echo "Incorrect Ussername or Password";
-            //echo file_get_contents('login_error.php');
+            //header('Location: dashboard.php');   
+
+          } else {
+
+          	echo "<br>";
+            echo "Incorrect Username or Password";
             
           }
+          //header('Location: dashboard.php'); 
+      }
     }
   }
-}
-
 
 
 

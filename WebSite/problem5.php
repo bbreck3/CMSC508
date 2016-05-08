@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+'<!DOCTYPE html>
 <meta chartset="utf-8">
 <head>
   <link rel="stylesheet" href="stylesheet.css">
@@ -138,9 +138,8 @@ $(function(){
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li> -->
-        
+    <ul class="nav navbar-nav">
+       
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
           <ul class="dropdown-menu forAnimate" role="menu">
@@ -148,9 +147,7 @@ $(function(){
             <li><a href="index.php">Logout</a></li>
             <li><a href="#">Change Password</a></li>
             <li class="divider"></li>
-            <!-- <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li> -->
+            
           </ul>
         </li>
         
@@ -162,7 +159,6 @@ $(function(){
 
 
 <!-- MAIN BODY CONTENTS GOES HERE -->
-
 <div class="main">
 
 
@@ -186,13 +182,11 @@ $(function(){
 
   <div class="panel panel-default">
     <div class="panel-heading"> <bold> <h1> 
-      Welcome to 5 Questions
+      Problem 5
 
 
     </h1> </bold></div>
-    <div class="panel-heading"> <bold> <h4>A hint about each question will be given to help you guess correctly.<br>
-                                          You will be unable to proceed to the next question until you successfully answer 
-                                          the current question.</h4> </bold></div>
+    
     <div class="panel-body">
 
 
@@ -205,9 +199,10 @@ $(function(){
 
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Problem 1</h1>
+    <h1 class="display-3">Problem  5</h1>
     <p class="lead">
 
+  
 
         
       <?php 
@@ -223,19 +218,19 @@ $(function(){
 
 
           $sql="SELECT problem, description, answer FROM puzzle
-              WHERE ID='1'";
+              WHERE ID='5'";
           //$sql = "SELECT * FROM user_info";
 
 
           $results=oci_parse($conn, $sql);
           oci_execute($results);
           $res = oci_fetch_array($results);
-         
+          
         
 
         
         $problem = $res[0];
-       // $answer = $res[2];
+      
         $description = $res[1];
           
         echo "Description";
@@ -246,51 +241,24 @@ $(function(){
         echo "<br>";
         echo $problem;
         
-       
+      
       }
     
 
 ?>
-
-  <form action="problem1_responce.php" method="post">
+ <form action="problem5_responce.php" method="post">
       <textarea name="responce" rows="1" cols="100"> </textarea>
 
       <!-- <input type="text" name="responce"> -->
       <input type="submit" value="Submit">
       </form>
+
+
+
 </div>
 </div> 
 
 <!-- END FORM -->
-
-<!-- END MAIN BODY CONTECT  -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
-            
-            
-
-
-
-                        
-                   
 
 </body>
 </html>
