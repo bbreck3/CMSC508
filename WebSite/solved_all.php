@@ -1,1 +1,0 @@
-<a href="finish.php">Finish</a>
